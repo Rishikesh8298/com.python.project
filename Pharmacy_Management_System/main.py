@@ -9,7 +9,7 @@ from pymongo.errors import ServerSelectionTimeoutError, DuplicateKeyError
 class PharmacyLogin(Template):
     client=MongoClient("mongodb://127.0.0.1:27017")
     database=client["PharmacyManagement"]
-    
+
     def __init__(self, win):
         self.win=win
         self.win.title("Pharmacy Management System")
@@ -60,7 +60,7 @@ class PharmacyLogin(Template):
     def reset(self):
         self.username.set("")
         self.password.set("")
-    
+
     def exitWindow(self):
         ms = msg.askyesno("Confirm", "Are you sure")
         if ms==True: exit(0)
@@ -178,12 +178,11 @@ class PatientRegistration(Template):
         else:
             msg.showinfo("Success", "Data successfully inserted!!")
             self.display()
-    
+
     def display(self):
         self.textbox.delete("1.0", "end-1c")
         self.textbox.insert(tk.INSERT, str(self.reference.get())+ "\t   "+ self.firstname.get()+"\t   "+self.address.get()+"\t   "+self.current.get()+"\t   "+self.telephone.get()+ "\t   "+self.fee.get())
 
-        
 class Hospital(Template):
     client=MongoClient("mongodb://127.0.0.1:27017")
     database=client["PharmacyManagement"]
@@ -280,7 +279,7 @@ class Hospital(Template):
         else:
             self.textBox2.delete("1.0", "end-1c")
             self.prescriptionData()
-    
+
     def delete(self):
         self.textBox.delete("1.0", "end-1c")
         self.textBox2.delete("1.0", "end-1c")
@@ -289,8 +288,8 @@ class Hospital(Template):
     def reset(self):
        variableList=[self.tabletName,self.reference,self.dose,self.number_of_tablets,self.lots,self.issuedDate,self.expDate,self.dailyDose,self.sideEffect,self.furtherInformation,self.storageAdvice,self.medication,self.drivingMachines,self.patientID,self.nhsNumber,self.patientName,self.dob,self.patientAddress]
        for i in variableList:
-           i.set("")    
-    
+           i.set("")
+
     def exitWin(self):
         ms = msg.askyesno("Confirm", "Are you sure")
         if ms==True: exit(0)
@@ -304,11 +303,11 @@ class Hospital(Template):
                 "Lots":self.lots.get(),
                 "Issued Date":self.issuedDate.get(),
                 "Exp Date":self.expDate.get(),
-                "Daily Dose":self.dailyDose.get(), 
-                "Side Effects":self.sideEffect.get(), 
+                "Daily Dose":self.dailyDose.get(),
+                "Side Effects":self.sideEffect.get(),
                 "Further Information":self.furtherInformation.get(),
-                "Storage Advice":self.storageAdvice.get(), 
-                "Driving Mechines": self.drivingMachines.get(), 
+                "Storage Advice":self.storageAdvice.get(),
+                "Driving Mechines": self.drivingMachines.get(),
                 "Medication":self.medication.get(),
                 "Patient ID":self.patientID.get(),
                 "NHS Number":self.nhsNumber.get(),
@@ -320,10 +319,10 @@ class Hospital(Template):
         try: self.collection.insert_one(document)
         except ServerSelectionTimeoutError: msg.showerror("Error", "Please turn ON your Mongo db server!!")
         except DuplicateKeyError: msg.showerror("Error", "All ready inserted")
-        
+
         else: msg.showinfo("Information", "Data stored!!")
 
 if __name__ == "__main__":
     win=tk.Tk()
-    pharam=PharmacyLogin(win)    
+    pharam=PharmacyLogin(win)
     win.mainloop()
