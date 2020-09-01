@@ -1,0 +1,91 @@
+{% extends 'front/master.html' %}{% load static %} {% block titleblock %}
+<title>About | Online Quiz Application</title>{% endblock %}{% block mainblock %}
+
+<!--/ About Star /-->
+<section class="section-about">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="about-img-box">
+                    <img src="{% static 'front/img/slide-about-1.jpg' %}" alt="" class="img-fluid" style="height: 100%;width: 100%;">
+                </div>
+                <div class="sinse-box">
+                    <h3 class="sinse-title">Online Quiz Application
+                        <span></span>
+                </div>
+            </div>
+            <div class="col-md-12 section-t8">
+                <div class="row">
+                    <div class="col-md-6 col-lg-5">
+                        <img src="{% static 'front/img/captain.jpg' %}" alt="" class="img-fluid" style="display:inline-block; height:400px;">
+                    </div>
+                    <div class="col-lg-2  d-none d-lg-block">
+                        <div class="title-vertical d-flex justify-content-start">
+                            <span>Online Quiz Application</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-5 section-md-t3">
+                        <div class="title-box-d">
+                            <h3 class="title-d">About
+                                <span class="text-d">Author</span>
+                        </div>
+
+                        <p class="color-text-a">
+                            {{site.aboutAdmin|safe}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ About End /-->
+
+<!--/ Contact Star /-->
+<section class="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 section-t8">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="col-md-12 mb-3">
+                            <h4 class="text-dark">Leave a comment:</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-md-7 ">
+                    <form action="{%url 'feedback' %}" method="post " role="form" class="form-a contactForm">{% csrf_token %}
+                        <div class="row ">
+                            <div class="col-md-6 mb-3 ">
+                                <div class="form-group ">
+                                    <input type="text " name="username" class="form-control form-control-lg form-control-a" placeholder="Your Name" data-rule="minlen:4" id=" username" data-msg=" Please enter at least 4 chars " required>
+                                    <div class="validation "></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3 ">
+                                <div class="form-group ">
+                                    <input name="email" type="email" class="form-control form-control-lg form-control-a " placeholder="Your Email " data-rule="email" id="email" data-msg=" Please enter a valid email " required>
+                                    <div class="validation "></div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-3 ">
+                                <div class="form-group ">
+                                    <textarea class="form-control " id="message" name="message" cols="45 " rows="6 " data-rule="required " data-msg="Please write something for us " placeholder="Suggestions are always welcome .. " required></textarea>
+                                    <div class="validation "></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 ">
+                                <button type="submit " class="btn btn-a ">Comment</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<!--/ Contact End /-->
+
+{% endblock %}

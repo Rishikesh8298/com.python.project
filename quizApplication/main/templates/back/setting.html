@@ -1,0 +1,89 @@
+{% extends 'back/master.html' %} {% load static %}{% block titleblock %}
+<title>Admin | Site Setting</title>{% endblock %} {% block ckblock %}
+<script src="{% static 'ckeditor/ckeditor.js' %}"></script> {% endblock %}{% block mainblock %}
+<!-- Datatables Header -->
+<div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="fa fa-table">Site</i> Setting<br><small>You an add, edit and delete your data!</small>
+        </h1>
+    </div>
+</div>
+<ul class="breadcrumb breadcrumb-top">
+    <li>Site</li>
+    <li><a href="/panel/question/add/">Setting</a></li>
+</ul>
+<!-- END Datatables Header -->
+<div class="row">
+    <div class="col-md-12">
+        <!-- Basic Form Elements Block -->
+        <div class="block">
+            <!-- Basic Form Elements Title -->
+            <div class="block-title">
+                <h2><strong>Site</strong> Setting</h2>
+            </div>
+            <!-- END Form Elements Title -->
+
+            <!-- Basic Form Elements Content -->
+            <form action="{%url 'site_setting' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                {% csrf_token %}
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <input type="text " id="name" name="name" class="form-control " value="{{site.name}}" placeholder="Site Name">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text " id="email" value="{{site.email}}" name="email" class="form-control " placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-md-6">
+                        <input type="text " id="youtube" value="{{site.youtube}}" name="youtube" class="form-control " placeholder="Youtube">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text " id="facebook" name="facebook" value="{{site.facebook}}" class="form-control " placeholder="Facebook">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-md-6">
+                        <input type="text " id="twitter" name="twitter" value="{{site.twitter}}" class="form-control " placeholder="Twitter ">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text " id="phone" name="phone" value="{{site.phone}}" class="form-control " placeholder="Phone">
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="col-md-12">
+                        <textarea type="text" id="about" name="about" row=" 7 " class="form-control" placeholder="About">{{site.about}}</textarea>
+                    </div>
+                </div>
+                <script>
+                    CKEDITOR.replace("about")
+                </script>
+                <div class="form-group ">
+                    <div class="col-md-12 ">
+                        <button type="submit " class="btn btn-sm btn-primary "><i class="fa fa-angle-right "></i>
+                     Submit</button>
+                    </div>
+                </div>
+
+            </form>
+            <!-- END Basic Form Elements Content -->
+        </div>
+        <!-- END Basic Form Elements Block -->
+    </div>
+</div>
+{% endblock %} {% block footerblock %}
+<script src="{%static 'back/js/pages/tablesDatatables.js' %} "></script>
+<script>
+    $(function() {
+        TablesDatatables.init();
+    });
+</script>
+<script src="{% static 'back/js/pages/formsGeneral.js' %} "></script>
+<script>
+    $(function() {
+        FormsGeneral.init();
+    });
+</script>
+{% endblock %}

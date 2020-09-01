@@ -1,0 +1,70 @@
+{% extends 'back/master.html' %}{% load static %} {% block titleblock %}
+<title>Admin | Question List</title>{% endblock %}{% block mainblock %}
+<!-- Datatables Header -->
+<div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="fa fa-table">List</i>Questions<br><small>You an add, edit and delete your data!</small>
+        </h1>
+    </div>
+</div>
+<ul class="breadcrumb breadcrumb-top">
+    <li>Question</li>
+    <li><a href="/panel/question/list/">List</a></li>
+</ul>
+<!-- END Datatables Header -->
+<!-- Datatables Content -->
+<div class="block full">
+    <div class="block-title">
+        <h2><strong>Question</strong> List</h2>
+    </div>
+
+    <div class="table-responsive">
+        <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-center">ID</th>
+                    <th>Subject</th>
+                    <th class="text-center">Question</th>
+                    <th>Option1</th>
+                    <th>Option2</th>
+                    <th>Option3</th>
+                    <th>Option4</th>
+                    <th>Correct Answer</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in question %}
+                <tr>
+                    <td class="text-center">{{i.pk}}</td>
+                    <td>{{i.subject}}</td>
+                    <td>{{i.questionName}}</td>
+                    <td>{{i.option1}}</td>
+                    <td>{{i.option2}}</td>
+                    <td>{{i.option3}}</td>
+                    <td>{{i.option4}}</td>
+                    <td><span>{{i.answer}}</span></td>
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <a href="{%url 'question_edit' pk=i.pk %}" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil">Edit</i></a>
+                            <a href="{%url 'question_delete' pk=i.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times">Delete</i></a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- END Datatables Content -->{% endblock %}{% block footerblock %}
+
+<!-- Load and execute javascript code used only in this page -->
+<script src="{%static 'back/js/pages/tablesDatatables.js' %}"></script>
+<script>
+    $(function() {
+        TablesDatatables.init();
+    });
+</script>
+{% endblock %}

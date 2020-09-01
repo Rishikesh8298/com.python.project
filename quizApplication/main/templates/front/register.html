@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'back/css/login.css' %}">
+    <link href="{% static 'front/lib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <title>Admin | Register</title>
+</head>
+
+<body class="bg-dark">
+    <div class="login">
+        <div class="login-triangle"></div>
+        <h2 class="login-header">Register</h2>
+        <form class="login-container" action="{%url 'myregister' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p><input type="text" name="name" id="name" placeholder="Name" required></p>
+            <p><input type="text" name="uname" id="uname" placeholder="Username" required></p>
+            <p><input type="email" name="email" id="email" placeholder="Email" required></p>
+            <p><input type="password" name="password" id="password" placeholder="Password" required></p>
+            <p><input type="password" name="repassword" id="repassword" placeholder="Verify Password" required></p>
+            <p id="error">{{error}}</p>
+            <p><input type="submit" value="Register"></p>
+            <p class="lead font-weight-bold">Already a user? <a href="/login/">Login</a></p>
+        </form>
+    </div>
+</body>
+
+</html>

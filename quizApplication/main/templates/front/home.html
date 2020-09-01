@@ -1,0 +1,131 @@
+{% extends 'front/master.html' %}{% load static %} {% block titleblock %}
+<title>Home | Online Quiz Application</title>{% endblock %}{% block mainblock %}
+<!--/ Carousel Star /-->
+<div class="intro intro-carousel">
+    <div id="carousel" class="owl-carousel owl-theme">
+        <div class="carousel-item-a intro-item bg-image" style="background-image: url({% static 'front/img/slide-1.jpg' %}) ">
+            <div class="overlay overlay-a "></div>
+            <div class="intro-content display-table ">
+                <div class="table-cell ">
+                    <div class="container ">
+                        <div class="row ">
+                            <div class="col-lg-8 ">
+                                <div class="intro-body ">
+                                    <p class="intro-title-top ">
+                                        <a href="# "><span class="price-a ">Subject | Python</span></a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item-a intro-item bg-image " style="background-image: url({% static 'front/img/slide-2.jpg' %})">
+            <div class="overlay overlay-a "></div>
+            <div class="intro-content display-table ">
+                <div class="table-cell ">
+                    <div class="container ">
+                        <div class="row ">
+                            <div class="col-lg-8 ">
+                                <div class="intro-body ">
+                                    <p class="intro-title-top ">
+                                        <a href="# "><span class="price-a ">Subject | Java</span></a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ Carousel end /-->
+
+<!--/ Services Star /-->
+<section class="section-services section-t8 ">
+    <div class="container ">
+        <div class="row ">
+            <div class="col-md-12 ">
+                <div class="title-wrap d-flex justify-content-between ">
+                    <div class="title-box ">
+                        <h2 class="title-a ">Our Services</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-md-4 ">
+                <div class="card-box-c foo ">
+                    <div class="card-header-c d-flex ">
+                        <div class="card-box-ico ">
+                            <img src="{% static 'front/img/java-logo.png' %}" style="width:100px;height: 100px;">
+                        </div>
+                        <div class="card-title-c align-self-center ">
+                            <h2 class="title-c ">Java</h2>
+                        </div>
+                    </div>
+                    <div class="card-body-c ">
+                        <p class="content-c ">
+                            Java is an Object Oriented Programming Language. Here, you can find variety of questions which will help you to test our self.
+                        </p>
+                    </div>
+                    <div class="card-footer-c ">
+                        <a href="# " class="link-c link-icon ">Take a Quiz
+                            <span class="ion-ios-arrow-forward "></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="card-box-c foo ">
+                    <div class="card-header-c d-flex ">
+                        <div class="card-box-ico ">
+                            <img src="{% static 'front/img/python-logo.jpg' %}" style="width:100px;height: 100px;">
+                        </div>
+                        <div class="card-title-c align-self-center ">
+                            <h2 class="title-c ">Python</h2>
+                        </div>
+                    </div>
+                    <div class="card-body-c ">
+                        <p class="content-c ">
+                            Python is an Object Oriented Programming Language. Here, you can find variety of questions which will help you to test our self.
+
+                        </p>
+                    </div>
+                    <div class="card-footer-c ">
+                        <a href="# " class="link-c link-icon ">Take a Quiz
+                            <span class="ion-ios-arrow-forward "></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="card-box-c foo ">
+                    <div class="card-header-c d-flex ">
+                        <div class="card-box-ico ">
+                            <img src="{% static 'front/img/c++logo.png' %}" style="width:100px;height: 100px;">
+                        </div>
+                        <div class="card-title-c align-self-center ">
+                            <h2 class="title-c ">C++</h2>
+                        </div>
+                    </div>
+                    <div class="card-body-c ">
+                        <p class="content-c ">
+                            C++ is an Procedural Oriented and Object Oriented Programming Language. Here, you can find variety of questions which will help you to test our self.
+                        </p>
+                    </div>
+                    <div class="card-footer-c ">
+                        <a href="# " class="link-c link-icon">Take a Quiz
+                            <span class="ion-ios-arrow-forward"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ Services End /-->
+
+{% endblock %}
