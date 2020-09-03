@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^panel/about/setting/$', views.about_setting, name='about_setting'),
     url(r'^panel/change/password/$', views.change_password, name='change_password'),
     url(r'^register/$', views.myregister, name='myregister'),
+    url(r'^user/panel/$', views.user_panel, name='user_panel'),
 ]

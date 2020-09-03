@@ -1,4 +1,4 @@
-{% load static %}{% if user.is_authenticated %}
+{% load static %}{% if user.is_authenticated %}{% if request.user.is_superuser %}
 <!DOCTYPE html>
 <!--[if IE 9]>         <html class="no-js lt-ie10" lang="en"> <![endif]-->
 <!--[if gt IE 9]><!-->
@@ -284,4 +284,4 @@
 
 </body>
 
-</html>{% else %} Please Login{% endif %}
+</html>{% endif %}{% else %} Please Login{% endif %}

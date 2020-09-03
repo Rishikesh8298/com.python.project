@@ -22,7 +22,7 @@ def about(request):
     return render(request, "front/about.html",{"question": question, "sub": sub, "site": site})
 
 def mylogin(request):
-    
+
     if request.method=="POST":
         uname=request.POST.get("username")
         upass=request.POST.get("password")
@@ -30,12 +30,12 @@ def mylogin(request):
             userlog = authenticate(username=uname, password=upass)
             if userlog != None:
                 login(request, userlog)
-                
+
                 if request.user.is_superuser:
                     return redirect("panel")
                 else:
-                    return redirect("about")
-                
+                    return redirect("user_panel")
+
     return render(request, 'front/login.html')
 
 def mylogout(request):
@@ -63,7 +63,7 @@ def result(request, word):
     today=str(day)+"/"+str(month)+"/"+ str(year)
     if request.method=="POST":
         print(word)
-        question=Question.objects.filter(subject=word)  
+        question=Question.objects.filter(subject=word)
         name=request.POST.get("name")
         email=request.POST.get("email")
         correct=0
@@ -91,12 +91,12 @@ def quiz(request, word):
     for i in question:
         li.append(i)
     shuffle(li)
-    
+
     if len(li) < 10:
-        enumerated_li=enumerate(li, 1)    
+        enumerated_li=enumerate(li, 1)
         return render(request, "front/quiz.html", {"sub": sub, "word":word, "question":enumerated_li, "site":site})
     else:
-        enumerated_li=enumerate(li[:10], 1)    
+        enumerated_li=enumerate(li[:10], 1)
         return render(request, "front/quiz.html", {"question": enumerated_li,"sub": sub, "word":word, "site": site})
 
 def site_setting(request):
@@ -112,7 +112,7 @@ def site_setting(request):
         twitter=request.POST.get("twitter")
         phone=request.POST.get("phone")
         about=request.POST.get("about")
-        # Update the Main         
+        # Update the Main
         data=Main.objects.get(pk=1)
         data.name=name
         data.email=email
@@ -121,7 +121,7 @@ def site_setting(request):
         data.phone=phone
         data.about=about
         data.save()
-        
+
     site=Main.objects.get(pk=1)
     return render(request, 'back/setting.html', {"site": site})
 
@@ -181,7 +181,7 @@ def change_password(request):
         else:
             error = "Incorrect Password"
             return render(request, "back/error.html", {"error": error})
-            
+
     return render(request, "back/change_password.html")
 
 def myregister(request):
@@ -205,12 +205,12 @@ def myregister(request):
             if i > "A" and i < "Z":
                 count2 = 1
             if i > "a" and i < "z":
-                count3 = 1 
+                count3 = 1
             # if i > "!" and i < "(":
             #     count4 = 1
         if count1 == 0 or count2 == 0 or count3 == 0 :
             error = "Your password is not strong"
-            return render(request, "front/register.html", {"error": error})            
+            return render(request, "front/register.html", {"error": error})
         if len(password) < 7:
             error = "Your password must be 7 character"
             return render(request, "front/register.html", {"error": error})
@@ -219,6 +219,11 @@ def myregister(request):
             data = Manager(name= name, email= email, uname = uname)
             data.save()
             return redirect("mylogin")
-
-            
     return render(request, "front/register.html")
+
+def user_panel(request):
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect("mylogin")
+    # Login check end
+    return render(request, "front/user/home.html")
