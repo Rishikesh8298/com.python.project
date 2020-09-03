@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'subject',
     'comment',
     'manager',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
