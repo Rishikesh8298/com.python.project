@@ -30,6 +30,7 @@ def subject_list(request):
     # Login check end
     sub=Subject.objects.all()
     return render(request, "back/subject_list.html", {"sub":sub})
+
 # Login User Quiz
 def user_quiz(request, word):
     # Login check start
@@ -41,9 +42,9 @@ def user_quiz(request, word):
     question=Question.objects.filter(subject=word)
     li=[i for i in question]
     shuffle(li)
-    uemail=Manager.objects.get(uname=request.user).email
-    print(uemail)
+    email=Manager.objects.get(uname=request.user).email
+    name=Manager.objects.get(uname=request.user).name
     if len(li) < 10: enumerated_li=enumerate(li, 1)
     else: enumerated_li=enumerate(li[:10], 1)
 
-    return render(request, "front/user/user_quiz.html", {"question": enumerated_li,"sub": sub, "word":word, "site": site, "uemail": uemail})
+    return render(request, "front/user/user_quiz.html", {"question": enumerated_li,"sub": sub, "word":word, "site": site, "email": email, "name": name})

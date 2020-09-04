@@ -5,8 +5,8 @@
         <form action="{% url 'user_result' word=word %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="app">
-                <input type="text" name="name" id="name" placeholder="Name" value="{{request.user}}" class="input" disabled>
-                <input type="email" name="uemail" id="uemail" placeholder="Email" value="{{uemail}}" class="input" style="float: right;" disabled>
+                <input type="text" name="name" id="name" placeholder="Name"  class="input" value = "{{name}}" readonly>
+                <input type="email" name="email" id="email" placeholder="Email" class="input" value= "{{email}}" style="float: right;" readonly>
             </div>
             {% for index,i in question %}
             <div class="app">

@@ -61,9 +61,8 @@ def result(request, word):
         month="0"+str(month)
 
     today=str(year)+"/"+str(month)+"/"+ str(day)
-    time=str(now.hour)+":"+str(now.minute)+":"+str(now.second)
+    ttime=str(now.hour)+":"+str(now.minute)+":"+str(now.second)
     if request.method=="POST":
-        print(word)
         question=Question.objects.filter(subject=word)
         name=request.POST.get("name")
         email=request.POST.get("email")
@@ -73,13 +72,10 @@ def result(request, word):
             if i.answer==request.POST.get("answer"+str(i.pk)):
                 correct=correct+1
             ques=ques+1
-        if ques < 10:
-            data=Record(name=name, email=email, subject=word, correctAnswer=correct, totalQuestion=ques, date=today)
-            data.save()
-        else:
-            ques=10
-            data=Record(name=name, email=email, subject=word, correctAnswer=correct, totalQuestion=ques, date=today, time=time)
-            data.save()
+        if ques < 10: ques = ques
+        else: ques=10
+        data=Record(name=name, email=email, subject=word, correctAnswer=correct, totalQuestion=ques, date=today, time = ttime)
+        data.save()
         return render(request, 'front/result.html', {"correct":correct, "ques":ques, "name":name, "email":email, "site": site})
     else:
         return redirect("home")
@@ -89,11 +85,9 @@ def quiz(request, word):
     question=Question.objects.filter(subject=word)
     sub=Subject.objects.all()
     li=[i for i in question]
-    shuffle(li)
-    if len(li) < 10:
-        enumerated_li=enumerate(li, 1)
-    else:
-        enumerated_li=enumerate(li[:10], 1)
+    # shuffle(li)
+    if len(li) < 10: enumerated_li=enumerate(li, 1)
+    else: enumerated_li=enumerate(li[:10], 1)
     return render(request, "front/quiz.html", {"question": enumerated_li,"sub": sub, "word":word, "site": site})
 
 def site_setting(request):

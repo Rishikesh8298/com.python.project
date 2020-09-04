@@ -5,6 +5,7 @@ from .models import Record
 from manager.models import Manager
 import datetime
 from subject.models import Subject
+
 def record_list(request):
     # Login check start
     if not request.user.is_authenticated:
@@ -49,31 +50,23 @@ def user_result(request, word):
     if len(str(month))==1:
         month="0"+str(month)
     today=str(year)+"/"+str(month)+"/"+ str(day)
-    time=str(now.hour)+":"+str(now.minute)+":"+str(now.second)
+    ttime=str(now.hour)+":"+str(now.minute)+":"+str(now.second)
+    print(ttime)
     if request.method=="POST":
         question=Question.objects.filter(subject=word)
         name=request.POST.get("name")
         email=request.POST.get("email")
         correct=0
         ques=0
-        if request.method=="POST":
-            question=Question.objects.filter(subject=word)
-            name=request.POST.get("name")
-            email=request.POST.get("email")
-            correct=0
-            ques=0
-            for i in question:
-                if i.answer==request.POST.get("answer"+str(i.pk)):
-                    correct=correct+1
-                ques=ques+1
-            if ques < 10:
-                print(name, email, word)
-                data=Record(name=name, email=email, subject=word, correctAnswer=correct, totalQuestion=ques, date=today, time=time)
-                data.save()
-            else:
-                print(name, email, word)
-                ques=10
-                data=Record(name=name, email=email, subject=word, correctAnswer=correct, totalQuestion=ques, date=today, time=time)
-                data.save()
-            return redirect("record_list_user")
+        for i in question:
+            if i.answer==request.POST.get("answer"+str(i.pk)):
+                correct=correct+1
+            ques=ques+1
+        if ques < 10:
+            ques = ques
+        else:
+            ques= 10
+        data=Record(name=name, email=email, subject=word, correctAnswer=correct, totalQuestion=ques, date=today, time=ttime)
+        data.save()
+        return redirect("record_list_user")
     return redirect("user_panel")

@@ -10,5 +10,6 @@ class Record(models.Model):
     totalQuestion=models.CharField(max_length=20)
     date=models.CharField(max_length=12, default="00/00/00")
     time=models.CharField(max_length=10, default="00:00:00")
+    
     def __str__(self):
         return self.name

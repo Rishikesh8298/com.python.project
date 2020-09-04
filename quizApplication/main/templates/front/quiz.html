@@ -3,8 +3,10 @@
 <div class="container p-3 my-3 text-dark">
     <div class="main">
         <form action="{%url 'result' word=word %}" method="post" enctype="multipart/form-data">
+
             {% csrf_token %}
             <div class="app">
+                <p>For taking more quiz please join us</p>
                 <input type="text" name="name" id="name" placeholder="Name" class="input" required>
                 <input type="email" name="email" id="email" placeholder="Email" class="input" style="float: right;" required>
             </div>
