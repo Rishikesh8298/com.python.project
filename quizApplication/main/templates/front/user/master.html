@@ -1,4 +1,4 @@
-{% load static %}{% if user.is_authenticated %}
+{% load static %} {% load humanize %}{% if user.is_authenticated %}
 <!DOCTYPE html>
 <!--[if IE 9]>         <html class="no-js lt-ie10" lang="en"> <![endif]-->
 <!--[if gt IE 9]><!-->
@@ -38,6 +38,7 @@
 
     <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
     <link rel="stylesheet" href="{% static 'back/css/themes.css' %}">
+    <link href="{% static 'back/css/style.css' %}" rel="stylesheet">
     <!-- END Stylesheets -->
 
     <!-- Modernizr (browser feature detection library) -->
@@ -89,6 +90,22 @@
                         <ul class="sidebar-nav">
                             <li>
                                 <a href="/user/panel/" class="active"><i class="gi gi-stopwatch sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Dashboard</span></a>
+                            </li>
+                            <li class="sidebar-header">
+                                <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
+                                <span class="sidebar-header-title">Subjects Quiz</span>
+                            </li>
+                            <li>
+                                <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Subject</span></a>
+                                <ul>
+                                {% for i in sub %}
+                                 {% if i.count != 0 %}
+                                    <li>
+                                        <a href="{% url 'user_quiz' word=i.subject %}">{{i.subject}}</a>
+                                    </li>
+                                {% endif %}
+                                {% endfor %}
+                                </ul>
                             </li>
                             <li class="sidebar-header">
                                 <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>

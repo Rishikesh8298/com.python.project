@@ -1,5 +1,5 @@
-{% extends 'front/user/master.html' %}{% load static %} {% block titleblock %}
-<title>{{request.user}} | Record List</title>{% endblock %}{% block mainblock %}
+{% extends 'front/user/master.html' %}{% load static %} {% load humanize %} {% block titleblock %}
+<title>{{request.user}} | History</title>{% endblock %}{% block mainblock %}
 <!-- Datatables Header -->
 <div class="content-header">
     <div class="header-section">
@@ -29,12 +29,12 @@
                 </tr>
             </thead>
             <tbody>
-                {% for i in manager %}
+                {% for i in history %}
                 <tr>
-                    <td class="text-center">{{i.name}}</td>
-                    <td class="text-center">{{i.uname}}</td>
-                    <td class="text-center">{{i.email}}</td>
-                    <td class="text-center">{{i.email}} & {{time}}</td>
+                    <td class="text-center">{{i.subject}}</td>
+                    <td class="text-center">{{i.correctAnswer}}</td>
+                    <td class="text-center">{{i.totalQuestion}}</td>
+                    <td class="text-center">{{i.date|naturalday}} & {{time|naturaltime}}</td>
                 </tr>
                 {% endfor %}
 

@@ -1,0 +1,25 @@
+{% extends 'front/user/master.html' %}{% load static %} {% block titleblock %}
+<title>Quiz | Quiz Application</title>{% endblock %}{% block mainblock %}
+<div class="container p-3 my-3 text-dark bg-success">
+    <div class="main">
+        <form action="{% url 'user_result' word=word %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="app">
+                <input type="text" name="name" id="name" placeholder="Name" value="{{request.user}}" class="input" disabled>
+                <input type="email" name="uemail" id="uemail" placeholder="Email" value="{{uemail}}" class="input" style="float: right;" disabled>
+            </div>
+            {% for index,i in question %}
+            <div class="app">
+                <h3 class="ques"><b>{{index}}. {{i.questionName|safe}}</b></h3>
+                <span class="option"><b>A. </b><input type="radio" name="answer{{i.pk}}" id="answer{{i.pk}}" value="{{i.option1}}">{{i.option1}}</span><br>
+                <span class="option"><b>B. </b><input type="radio" name="answer{{i.pk}}" id="answer{{i.pk}}" value="{{i.option2}}">{{i.option2}}</span><br>
+                <span class="option"><b>C. </b><input type="radio" name="answer{{i.pk}}" id="answer{{i.pk}}" value="{{i.option3}}">{{i.option3}}</span><br>
+                <span class="option"><b>D. </b><input type="radio" name="answer{{i.pk}}" id="answer{{i.pk}}" value="{{i.option4}}">{{i.option4}}</span>
+            </div>
+            {% endfor %}
+            <div class="app">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>{% endblock %}

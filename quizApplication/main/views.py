@@ -60,7 +60,8 @@ def result(request, word):
     if len(str(month))==1:
         month="0"+str(month)
 
-    today=str(day)+"/"+str(month)+"/"+ str(year)
+    today=str(year)+"/"+str(month)+"/"+ str(day)
+    time=str(now.hour)+":"+str(now.minute)+":"+str(now.second)
     if request.method=="POST":
         print(word)
         question=Question.objects.filter(subject=word)
@@ -72,12 +73,12 @@ def result(request, word):
             if i.answer==request.POST.get("answer"+str(i.pk)):
                 correct=correct+1
             ques=ques+1
-        if ques <10:
+        if ques < 10:
             data=Record(name=name, email=email, subject=word, correctAnswer=correct, totalQuestion=ques, date=today)
             data.save()
         else:
             ques=10
-            data=Record(name=name, email=email, subject=word, correctAnswer=correct, totalQuestion=ques, date=today)
+            data=Record(name=name, email=email, subject=word, correctAnswer=correct, totalQuestion=ques, date=today, time=time)
             data.save()
         return render(request, 'front/result.html', {"correct":correct, "ques":ques, "name":name, "email":email, "site": site})
     else:
@@ -85,19 +86,15 @@ def result(request, word):
 
 def quiz(request, word):
     site=Main.objects.get(pk=1)
-    li=[]
     question=Question.objects.filter(subject=word)
     sub=Subject.objects.all()
-    for i in question:
-        li.append(i)
+    li=[i for i in question]
     shuffle(li)
-
     if len(li) < 10:
         enumerated_li=enumerate(li, 1)
-        return render(request, "front/quiz.html", {"sub": sub, "word":word, "question":enumerated_li, "site":site})
     else:
         enumerated_li=enumerate(li[:10], 1)
-        return render(request, "front/quiz.html", {"question": enumerated_li,"sub": sub, "word":word, "site": site})
+    return render(request, "front/quiz.html", {"question": enumerated_li,"sub": sub, "word":word, "site": site})
 
 def site_setting(request):
     # Login check start
@@ -226,4 +223,5 @@ def user_panel(request):
     if not request.user.is_authenticated:
         return redirect("mylogin")
     # Login check end
-    return render(request, "front/user/home.html")
+    sub = Subject.objects.all()
+    return render(request, "front/user/home.html", {"sub": sub})
