@@ -34,7 +34,7 @@ def record_list_user(request):
         return redirect("mylogin")
     # Login check end
     uemail=Manager.objects.get(uname=request.user).email
-    history = Record.objects.filter(email=uemail)
+    history = Record.objects.filter(email=uemail).order_by("-pk")
     sub = Subject.objects.all()
 
     return render(request, "front/user/record_list_user.html", {"history":history, "sub":sub})
@@ -68,5 +68,5 @@ def user_result(request, word):
             ques= 10
         data=Record(name=name, email=email, subject=word, correctAnswer=correct, totalQuestion=ques, date=today, time=ttime)
         data.save()
-        return redirect("record_list_user")
-    return redirect("user_panel")
+        return render(request, 'front/user/result.html', {"correct":correct, "ques":ques, "name":name, "email":email, "site": site})
+    return redirect('record_list_user')

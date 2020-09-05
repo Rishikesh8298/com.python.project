@@ -1,0 +1,15 @@
+{% extends 'front/user/master.html' %} {% block titleblock %}
+<title>Result | Online Quiz Application</title>{% endblock %} {% block mainblock %}
+<div class="result">
+   <div class="alert alert-success" role="alert">
+       <hr>
+       <h4 class="alert-heading"><b>Thank You! {{name}}</b></h4>
+       <hr>
+       <h4 class="mb-0"><b>Correct: {{correct}}</b> Total Question: {{ques}}</h4>
+   </div>
+   <div class="container p-3 my-3 bg-dark text-white border">
+     <a href="{% url 'record_list_user' %}">Back to History</a>
+   </div>
+</div>
+
+{% endblock %}

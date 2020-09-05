@@ -59,7 +59,6 @@ def result(request, word):
         day="0"+str(day)
     if len(str(month))==1:
         month="0"+str(month)
-
     today=str(year)+"/"+str(month)+"/"+ str(day)
     ttime=str(now.hour)+":"+str(now.minute)+":"+str(now.second)
     if request.method=="POST":
@@ -77,8 +76,7 @@ def result(request, word):
         data=Record(name=name, email=email, subject=word, correctAnswer=correct, totalQuestion=ques, date=today, time = ttime)
         data.save()
         return render(request, 'front/result.html', {"correct":correct, "ques":ques, "name":name, "email":email, "site": site})
-    else:
-        return redirect("home")
+    return redirect("home")
 
 def quiz(request, word):
     site=Main.objects.get(pk=1)
